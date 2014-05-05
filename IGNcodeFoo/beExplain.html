@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>	
+	<meta charset = "utf-8" />
+	<meta name = "viewport" initial-scale="1.0" /> 
+	
+	<link rel = "stylesheet" href = "css/reset.css" />
+	<link rel = "stylesheet" href = "css/style.css" />
+	<title>Bay Bridge - Back End Explanation</title>
+	
+</head>
+<body>
+<div class = "container">
+<div class = "panel">
+	<h2 class = "centerTitle">Bay Bridge - Back End Explanation</h2><br>
+	<p>Notes about program:</p>
+	<p class = "tabbed">I changed some of the default values...</p>
+		<p class = "tabbed">- The length of road was changed to 1500ft instead of 1000ft due to <a href = 'https://www.google.com/maps/dir/37.8241925,-122.3170981/37.8227327,-122.3222767/@37.8227884,-122.3182145,17z/data=!4m4!4m3!1m0!1m0!3e0?hl=en' target = "_blank">
+		research</a>. I found the road length from the metering lights to the final merge is around 0.3 miles (~1500ft).</p>
+		<p class = "tabbed">- The top most merge structure will always contain only two lanes because they bypass the toll plaza completely 
+		and partly come from W Grand Ave instead of an Interstate. (unless there is only one outgoing lane)</p>
+		<p class = "tabbed">- I found the recommended minimun safe traveling distance as recommended by the <a href = "https://apps.dmv.ca.gov/pubs/dl600.pdf">California DMV.</a>  
+		They recommended to allow for 1 second of stopping distance per 10ft of your vehicle if traveling under 40mph.  
+		If traveling over 40mph, add an extra second.  2.5 seconds traveling at 50mph (3.048m/s) is equal to 55.88 meters.</p>
+		<p class = "tabbed">- Only the largest merge structure (the structure that has the most lanes) needs to be calculated.  
+		The other merge structures can be ignored since all their cars will traverse the bridge faster than the ones in the
+		largest merge structure</p>
+		<p class = "tabbed">- All values were converted to the metric system before put into the program</p><br>
+	
+	<p>Explanation of Merge Structure:</p>
+	<p>As seen in the graphic below, only certain lanes merge down to the output lanes.</p>
+	<div id = "imgContainer"><img id = "imgStretch" src = "img/mergeStructure.jpg"></div><br>
+	
+	<p>Basic Breakdown:</p>
+	<ol>
+		<li>Test user input for errors</li>
+		<li>Create a bridge object based on user input</li>
+		<li>Create the bridge's merge structure</li>
+		<li>Print out total number of cars and bridge information</li>
+		<li>Take the largest bridge merge structure and multiple by cars per lane to find total cars in merge structure</li>
+		<li>Calculate how long it takes to accelerate to 50mph and how far the car traveled during that period</li>
+		<li>Calculate time needed to traverse the rest of the bridge at 50mph</li>
+		<li>Calculate minimun time for all the cars to traverse the bridge</li>
+			<ol class = "subUl">
+				<li>Calculate the time it takes for a car to travel one car length</li>
+				<li>Multiply that time by number of cars in the merge structure</li>
+				<li>Add that to the time that it takes for one car to traverse the bridge</li>
+			</ol>
+		<li>Calculate time for all the cars to traverse the bridge at the minimun safe following distance</li>
+			<ol class = "subUl">
+				<li>Calculate the time it takes for a car to travel to a safe following distance</li>
+				<li>Multiply that time by number of cars in the merge structure</li>
+				<li>Add that to the time that it takes for one car to traverse the bridge</li>
+			</ol>
+		<li>Print out information</li>
+	</ol><br>
+	
+	<p>List of Assumptions:</p>
+	<ul>
+		<li>Default of 16 incoming lanes</li>
+		<li>Default of 5 outgoing lanes</li>
+		<li>Default of 4 vehicles per lane (64 total)</li>
+		<li>Default merge structure is (2, 3, 4, 3, 4)</li>
+		<li>Vehicles start at 0mph (0m/s) and max at 50mph (22.352m/s)</li>
+		<li>Vehicles accelerate at a constant rate of 10ft/s<sup>2</sup> (3.048m/s<sup>2</sup>)</li>
+		<li>Vehicles are 15ft (4.572m) long</li>
+		<li>Minimun safe distance between vehicles is 2.5 seconds (55.88m @ 50mph)</li>
+		<li>Lateral distance is not considered</li>
+		<li>A vehicle not first in line is assumed to be instantly first in line if the car in front departs</li>
+		<li>The length of the road from the metering lights to the final merge point is 1500ft (482.803m)</li>
+		<li>The top most merge structure will always contain only two lanes</li>
+			<ul class = "dashed">
+				<li>EXCEPTION: If there is only one outgoing lane, all lanes will merge into one</li>
+			</ul>
+	</ul><br>
+</div>
+</div>
+</body>
+</html>

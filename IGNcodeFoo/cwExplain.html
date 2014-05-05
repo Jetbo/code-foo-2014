@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>	
+	<meta charset = "utf-8" />
+	<meta name = "viewport" initial-scale="1.0" /> 
+	
+	<link rel = "stylesheet" href = "css/reset.css" />
+	<link rel = "stylesheet" href = "css/style.css" />
+	<title>Crossword Explanation</title>
+	
+</head>
+<body>
+<div class = "container">
+<div class = "panel">
+	<h2 class = "centerTitle">Crossword Explanation</h2><br>
+	<p>Basic Breakdown:</p>
+	<ol>
+		<li>Test user input for errors</li>
+		<li>Sort words by length</li>
+		<li>Convert input into all uppsercase</li>
+		<li>Place first word onto a 2D grid</li>
+		<li>Iterate through words</li>
+			<ol class = "subUl">
+				<li>Take each word and iterate through its individual letters</li>
+				<li>Compare that letter to every letter on the grid</li>
+				<li>If a letter matches, test to see if the whole word will fit on the grid</li>
+					<ul>
+						<li>FITS: Place word on grid</li>
+						<li>DOES NOT FIT: Do not place word on grid and put into a "failed" que</li>
+					</ul>
+				<li>Remove word from que and repeat step #5 till words run out</li>
+				<li>Take the "failed" que and repeat step #5 till words run out</li>
+					<ul>
+						<li>Failed words go into a new "final failed" group</li>
+					</ul>
+			</ol>
+		<li>Convert 2D grid into table system</li>
+		<li>Output table</li>
+		<li>Output list of final failed words</li>
+	</ol><br>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>	
+	<meta charset = "utf-8" />
+	<meta name = "viewport" initial-scale="1.0" /> 
+	
+	<link rel = "stylesheet" href = "css/reset.css" />
+	<link rel = "stylesheet" href = "css/style.css" />
+	<title>IGN logo rendered by WebGL</title>
+	
+</head>
+<body>
+	<script src="js/three.min.js"></script>
+	<script src="js/tween.js"></script>
+	<script src="js/OrbitControls.js"></script>
+	<script src="js/JSONLoader.js"></script>
+	
+	<script>
+		// Set up some variables.
+		var scene, camera, renderer;
+		//will store items that can be clicked
+		var clickable = [];
+		//animation has not played yet
+		var played = false;
+		
+		//initiate
+		init();
+		//animate/render
+		animate();
+		
+		//sets up the scene.
+		function init() {
+			//create the scene and set the scene size.
+			scene = new THREE.Scene();
+			
+			//create a renderer 
+			renderer = new THREE.WebGLRenderer({antialias:true});
+			//set render size in window
+			renderer.setSize(window.innerWidth, window.innerHeight);
+			//add it to the DOM.
+			document.body.appendChild(renderer.domElement);
+			renderer.domElement.id = "context";
+			
+			//projector for casting rays
+			projector = new THREE.Projector();
+			
+			//create a camera, zoom it out from the model a bit, and add it to the scene.
+			camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 20000);
+			camera.position.set(0,75,30);
+			scene.add(camera);
+			
+			//create some lights, set their position, and add them to the scene.
+			var lightFront = new THREE.PointLight(0xffffff, 1.0);
+			lightFront.position.set(-100,200,100);
+			scene.add(lightFront);
+			
+			var lightBack = new THREE.PointLight(0x858585, 0.8);
+			lightBack.position.set(100,-200,-100);
+			scene.add(lightBack);
+			
+			var lightLeft = new THREE.PointLight(0xFFB300, 0.2);
+			lightLeft.position.set(-100,0,0);
+			scene.add(lightLeft);
+			
+			var lightRight = new THREE.PointLight(0xEA00FF, 0.2);
+			lightRight.position.set(100,0,0);
+			scene.add(lightRight);
+			
+			//create the material
+			material = new THREE.MeshPhongMaterial({color: 0xd52029, shininess: 50, specular: 0xd52029});
+			//load the IGN logo
+			loader = new THREE.JSONLoader();
+			loader.load('assests/3d/IGNlogo.js', function(geometry){
+				//create mesh obj with material
+				IGNlogo = new THREE.Mesh(geometry, material);
+				//set position
+				IGNlogo.position.set(0, 0, -5);
+				//make clickable
+				clickable.push(IGNlogo);
+				//add to scene
+				scene.add(IGNlogo);
+			});
+			
+			//add OrbitControls so that we can pan around with the mouse.
+			controls = new THREE.OrbitControls(camera, renderer.domElement);
+			//turn zoom and pan off
+			controls.noPan = true;
+			controls.noZoom = true;
+			
+			//mouse down event
+			document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+			//window resize event
+			window.addEventListener( 'resize', onWindowResize, false );
+		}
+		
+		//on window resize
+		function onWindowResize(){
+			//resize the scene to the window
+			window.addEventListener('resize', function() {
+				renderer.setSize(window.innerWidth, window.innerHeight);
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+			});
+		}
+		
+		//on click
+		function onDocumentMouseDown(event) {
+			//don't pass click action to browser
+			event.preventDefault();
+			
+			//vector
+			var vector = new THREE.Vector3((event.clientX / window.innerWidth) * 2 - 1, - (event.clientY / window.innerHeight) * 2 + 1, 0.5);
+			projector.unprojectVector( vector, camera );
+			
+			var raycaster = new THREE.Raycaster(camera.position, vector.sub(camera.position).normalize());
+			
+			//see if click is on clickable objects
+			var intersects = raycaster.intersectObjects(clickable);
+			
+			//if animation has not played and use has clicked on an object
+			if(!played && intersects.length > 0)
+			{
+				document.removeEventListener('mousedown', onDocumentMouseDown);
+				//load the IGN letters
+				loader.load('assests/3d/IGNtext.js', function(geometry){
+					IGNtext = new THREE.Mesh(geometry, material);
+					IGNtext.position.set(50, -2.5, -4);
+					clickable.push(IGNtext);
+					scene.add(IGNtext);
+					
+					//do some tweens
+					new TWEEN.Tween( camera.position ).to( {
+						x: 0,
+						y: 150,
+						z: 50 }, 5000 )
+					.easing( TWEEN.Easing.Quadratic.InOut).delay(3000).start();
+					
+					new TWEEN.Tween( IGNlogo.position ).to( {
+						x: -70,
+						y: 0,
+						z: -5 }, 5000 )
+					.easing( TWEEN.Easing.Quadratic.InOut).delay(3000).start();
+					
+					new TWEEN.Tween( IGNlogo.rotation ).to( {
+						x: 0,
+						y: 50,
+						z: 0 }, 10000 )
+					.easing( TWEEN.Easing.Cubic.InOut).start();
+	
+					new TWEEN.Tween( IGNtext.position ).to( {
+						x: -70,
+						y: -2.5,
+						z: -4 }, 5000 )
+					.easing( TWEEN.Easing.Quadratic.InOut).delay(2750).start();
+					
+					//set animation to has been played
+					played = true;
+				});
+			}else{
+				//go to ign website if logo clicked on
+				if ( intersects.length > 0 ) {
+					window.open("http://www.ign.com", '_self');
+				}
+			}
+			//clear mouse click while animation is player
+			var intervalId = window.setInterval(function(){
+				//turn zoom and pan back on
+				controls.noPan = false;
+				controls.noZoom = false;
+				//turn mouse click back on
+				document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+				//exit interval
+				clearInterval(intervalId);
+			}, 10000);
+		}
+		
+		//animates
+		function animate() {
+			
+			requestAnimationFrame(animate );
+			IGNlogo.rotation.y += 0.001;
+			
+			render();			
+		}
+		
+		//renders the scene and updates
+		function render(){
+			TWEEN.update();
+			controls.update();
+			renderer.render( scene, camera );
+		}
+	</script>
+</body>
+</html>

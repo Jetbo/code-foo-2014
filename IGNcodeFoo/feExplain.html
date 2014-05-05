@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>	
+	<meta charset = "utf-8" />
+	<meta name = "viewport" initial-scale="1.0" /> 
+	
+	<link rel = "stylesheet" href = "css/reset.css" />
+	<link rel = "stylesheet" href = "css/style.css" />
+	<title>Bay Bridge - Front End Explanation</title>
+	
+</head>
+<body>
+<div class = "container">
+<div class = "panel">
+	<h2 class = "centerTitle">Bay Bridge - Front End Explanation</h2><br>
+	<p>Notes on method:</p>
+	<p class= "tabbed">I used the JavaScript plugin <a href = "http://snapsvg.io/" target = "_blank">Snap.svg</a> to run my vector map app.  
+		I recreated the majority of lane diagram that was <a href="https://www.bayareafastrak.org/static/facilities/LaneDiagSF-Oak-final.pdf" target = "_blank">originally provided</a>.
+		Based upon research into the subject I was to find that the diagram isn't accurate and decided to change it to how it is shown on google maps (satellite view) instead.</p><br>
+	
+	<p>List of changes:</p>
+	<ul>
+		<li>All lanes and merge structures were updated</li>
+		<li>The incoming highway system was updated to be more accurate</li>
+		<li>FasTrak lanes were changed to match <a href = "http://www.baycrossings.com/admin/HTML/upload/download/SFOakland_Bay.jpg" target = "_blank">this</a></li>
+		<li>The delineator traffic posts seperating regular lanes from FasTrak lanes were also changed</li>
+		<li>The Rose Compass now points in the correct direction</li>
+		<li>Overall aesthetic improvements to increase legibility</li>
+	</ul><br>
+	
+	<p>List of app features:</p>
+	<ul>
+		<li>The map can be zoomed in or out with either the zoom buttons or with the middle mouse scroll</li>
+		<li>Various things can be animated/highlighted when hovered on (or clicked with mobile devices)</li>
+		<li>The Interstate and Road icons can be clicked on to open a new page with relevant information</li>
+		<li>The FasTrak lanes in the key can be hovered on to highlight their corresponding lanes on the map (or clicked with mobile devices)</li>
+		<li>Dragging of the map can either be turned on or off</li>
+		<li>The merge structure of how the lanes merge down into five lanes can be shown or hidden</li>
+		<li>The app can have a fullscreen mode activated</li>
+	</ul><br>
+	
+	<p>Notes to user:</p>
+	<ul>
+		<li>If on a mobile device, you must disable dragging before you can interact with the map</li>
+		<li>Mobile users might find the map easier to interact with if they zoom in some</li>
+		<li>The reset button will re-center the map and remove any zoom</li>
+	</ul><br>
+</div>
+</div>
+</body>
+</html>

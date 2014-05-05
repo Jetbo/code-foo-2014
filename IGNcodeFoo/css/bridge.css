@@ -1,0 +1,155 @@
+/* BEGIN Section A */
+#afterMap{
+	margin-top: 20px;
+}
+
+#svgWrapper{
+	position: relative;
+	width: 100%;
+	height: 255px;
+}
+
+#map{
+	position: absolute;
+	width: 98.5%;
+	top: 0;
+	left: 0.5%;
+	border: #c0c0c0 2px inset;
+}
+
+#feZoomIn, #feZoomOut, #feZoomReset{
+	margin-left: 0.5%;
+}
+/* END Section A */
+
+/* BEGIN Section B */
+.beNumber{
+	resize: none;
+	width: 50px;
+}
+
+.beNumber:hover{
+	border-color: #afdced;
+}
+
+#afterBe{
+	margin-top: 20px;
+}
+
+#beErrorRed{
+	font-size: 0.75em;
+	height: 15px;
+	color: #800000;
+}
+
+#beErrorYellow{
+	font-size: 0.75em;
+	height: 15px;
+	color: #9b9f00;
+}
+/* END Section B */
+
+.lineBreak{
+	padding-top: 1px;
+}
+
+.lineBreak:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.lineBreak span {
+    padding-right: 10px;
+    float: left;
+}
+
+.lineBreak hr {
+    border:1px dashed black;
+    border-width: 1px 0 0 0;
+    margin-top: 10px;
+    margin-right: 5px;
+}
+
+/* begin mobile styling */
+@media only screen and (max-device-width: 800px){
+	/* BEGIN Section A */
+	#afterMap{
+		margin-top: 50px;
+	}
+	
+	#feZoomIn, #feZoomOut, #feZoomReset{
+		height: 100px;
+		width: 30%;
+		margin-left: 2.5%;
+	}
+	
+	#map{
+		width: 96%;
+		left: 2%;
+		border: #c0c0c0 4px inset;
+	}
+	/* END Section A */
+	
+	/* BEGIN Section B */
+	#afterBe{
+		margin-top: 0px;
+	}
+	
+	#beResetButton{
+		float: left;
+		clear: left;
+		height: 100px;
+		width: 50%;
+		margin: 110px 10px 10px 10px;
+	}
+	
+	#beSubmit{
+		height: 100px;
+		width: 40%;
+		margin: 110px 10px 10px 10px;
+	}
+	
+	#beErrorRed{
+		position: relative;
+		top: -200px;
+		font-size: 2em;
+	}
+	
+	#beErrorYellow{
+		position: relative;
+		top: -170px;
+		font-size: 2em;
+	}
+	
+	#beResult{
+		font-size: 2em;
+	}
+	
+	#afterBe{
+		margin-top: 50px;
+	}
+	
+	.beNumber{
+		width: 200px;
+		border: #808080 solid 8px;
+	}
+	
+	.beNumber:focus{
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		width: 200px;
+	}
+	
+	.beNumWrapper{
+		margin: 5px 0 0 0;
+		float: left;
+		clear: both;
+	}
+	/* END Section B */
+	
+	.lineBreak hr {
+	    border-width: 2px 0 0 0;
+	    margin-top: 30px;
+	}
+}

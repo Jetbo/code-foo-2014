@@ -1,0 +1,128 @@
+td, .empty, .startAcross, .startAcross{
+	height: 20px;
+	width: 20px;
+	padding: 0;
+	margin: 0;
+	border-left: 1px solid black;
+	border-bottom: 1px solid black;
+	-webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+.empty{
+	background: black;
+}
+
+.startDown{
+	background: yellow;
+}
+
+.startAcross{
+	background: purple;
+}
+
+#crosswordResult{
+	display: none;
+}
+
+#cwRadios{
+	float: left;
+	height: 100px;
+}
+
+#cwTextAreaError{
+	font-size: 0.75em;
+	height: 25px;
+	clear: both;
+	float: left;
+	color: #800000;
+}
+
+#cwIGNWordsButton, #cwMyWordsButton{
+	float: left;
+	width: 40%;
+	height: 50px;
+	margin-left: 10px;
+}
+
+#cwSubmit{
+	height: 50px;
+	width: 100%;
+	float: left;
+	clear: both;
+}
+
+#cwTextArea{
+	width: 50%;
+	height: 100px;
+	resize: none;
+	float: left;
+	border: #808080 3px solid;
+	
+	-webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+#cwTextArea:hover{
+	border-color: #afdced;
+}
+
+td{
+	background: white;
+	text-align:center;
+}
+
+#cwTable{
+	margin: auto;
+}
+
+@media only screen and (max-device-width: 800px){
+	td, .empty, .startAcross, .startAcross{
+		height: 30px;
+		width: 30px;
+		font-size: 1.5em;
+	}
+	
+	#cwTextArea{
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		width: 70%;
+		height: 300px;
+		float: left;
+		border-width: 10px;
+	}
+	
+	#cwRadios{
+		margin-top: 40px;
+		float: left;
+		clear: right;
+		margin-left: 5px;
+	}
+	
+	#cwIGNWordsButton, #cwMyWordsButton{
+		float: none;
+		width: 45%;
+		height: 100px;
+		margin: 50px 10px 10px 10px;
+	}
+	
+	#cwSubmit{
+		height: 100px;
+		width: 95%;
+		float: none;
+		clear: none;
+	}
+	
+	#cwTextAreaError{
+		position: relative;
+		float: none;
+		clear: none;
+		left: -20px;
+		top: -150px;
+		font-size: 1.5em;
+		height: 20px;
+		color: #800000;
+	}
+}
