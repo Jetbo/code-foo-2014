@@ -5,5 +5,7 @@ Hello my name is Adam Sligar and I am applying for IGN's Code-Foo 2014. All answ
 
 I used HTML, CSS, JavaScript (including various js libraries), PHP, and Ajax to create the site.  The stock android mobile browser may not work if it's old, just use Chrome/Firefox/Opera mobile if so.
 
+Refer to the various explanation links for program explanations and breakdowns, I also commented most of the important code.
+
 
 
